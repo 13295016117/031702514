@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 			s[i] = 'a'; s[i + 1] = 'a';
 		}
 		k = i + 1;
-		y = { "'',''手机''：" };
+		y = { "'',''手机''：''" };
 		re += y;
 		for (i = 0; s[i] != '\0'; i++)
 		{
