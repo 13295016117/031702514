@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 		}
 		d = { "'']}}" };
 		re += d;
-		cout << re;
+		cout << re<<endl;
 		outfile << re;
 	}
 	outfile.close();
