@@ -3,78 +3,9 @@
 #include<string>
 #include<fstream>
 using namespace std;
-class Exception//异常类
-{
-public:
-	Exception(const string& msg, int id)
-	{
-		_msg = msg;
-		_id = id;
-	}
 
-	const char* What() const
-	{
-		return _msg.c_str();
-	}
-
-protected:
-	string _msg;
-	int    _id;
-};
-
-template<size_t N = 10>
-class Array
-{
-public:
-	int& operator[](size_t pos)
-	{
-		if (pos >= N)
-		{
-			Exception e("下标不合法", 1); //出了这个作用域，抛出的异常对象就销毁了，这时会生成一个匿名对象先接受这个对象，并传到外层栈帧。
-			throw e;
-		}
-		return a[pos];
-	}
-protected:
-	int a[N];
-};
-
-int f()
-{
-	try
-	{
-		Array<> a;
-		a[11];
-	}
-	catch (exception& e)
-	{
-		cout << e.what() << endl; //类型不匹配，找离抛出异常位置最近且类型匹配的那个。
-	}
-
-	return 0;
-}
-void Test1()
-{
-	try
-	{
-		char* p = new char[0x7fffffff];  //抛出异常
-	}
-	catch (exception e)
-	{
-		cout << e.what() << endl;   //捕获异常，然后程序结束
-	}
-}
 int main(int argc, char **argv)
 {
-	try
-	{
-		f();
-	}
-	catch (Exception& e)
-	{
-		cout << e.What() << endl;
-	}
-
 	ifstream infile(argv[1]);
 	ofstream outfile(argv[2]);
 	if (!infile.is_open())
@@ -188,7 +119,6 @@ int main(int argc, char **argv)
 		}
 		d = { "'']}}" };
 		re += d;
-		
 		cout << re << endl;
 		outfile << re;
 
